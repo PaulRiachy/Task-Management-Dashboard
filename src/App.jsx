@@ -272,7 +272,14 @@ function App() {
       </main>
 
       {taskToDelete && (
-        <div className="modal-overlay" onClick={cancelDelete}>
+        <div
+          className="modal-overlay"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              cancelDelete();
+            }
+          }}
+        >
           <div
             ref={modalRef}
             className="modal"
