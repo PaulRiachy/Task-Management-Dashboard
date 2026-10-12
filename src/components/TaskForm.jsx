@@ -32,26 +32,24 @@ const emptyForm = {
 };
 
 function TaskForm({ onSubmit, editingTask, onCancelEdit }) {
-  const [form, setForm] = useState(emptyForm);
+  const [form, setForm] = useState(() =>
+    editingTask
+      ? {
+          title: editingTask.title,
+          description: editingTask.description,
+          priority: editingTask.priority,
+          status: editingTask.status,
+        }
+      : { ...emptyForm },
+  );
+
   const [errors, setErrors] = useState({});
 
   const titleInputRef = useRef(null);
 
   useEffect(() => {
-    if (editingTask) {
-      setForm({
-        title: editingTask.title,
-        description: editingTask.description,
-        priority: editingTask.priority,
-        status: editingTask.status,
-      });
-    } else {
-      setForm(emptyForm);
-    }
-
-    setErrors({});
     titleInputRef.current?.focus();
-  }, [editingTask]);
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

@@ -50,6 +50,7 @@ function App() {
   const [sortBy, setSortBy] = useState("newest");
   const [editingTask, setEditingTask] = useState(null);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [editSession, setEditSession] = useState(0);
   const modalRef = useRef(null);
 
   const { darkMode, toggleTheme } = useTheme();
@@ -183,6 +184,7 @@ function App() {
 
   const handleEdit = useCallback((task) => {
     setEditingTask({ ...task });
+    setEditSession((current) => current + 1);
 
     window.scrollTo({
       top: 0,
@@ -239,6 +241,7 @@ function App() {
         <TaskStatistics statistics={statistics} />
 
         <TaskForm
+          key={`${editingTask?.id ?? "new"}-${editSession}`}
           onSubmit={handleSaveTask}
           editingTask={editingTask}
           onCancelEdit={() => setEditingTask(null)}
