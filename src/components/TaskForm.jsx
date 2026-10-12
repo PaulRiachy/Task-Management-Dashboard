@@ -96,10 +96,7 @@ function TaskForm({ onSubmit, editingTask, onCancelEdit }) {
   };
 
   const handleCancel = () => {
-    setForm(emptyForm);
-    setErrors({});
     onCancelEdit();
-    titleInputRef.current?.focus();
   };
 
   return (

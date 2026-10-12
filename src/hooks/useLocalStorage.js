@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useLocalStorage(key, initialValue) {
+function useLocalStorage(key, initialValue, validate = () => true) {
   const [value, setValue] = useState(() => {
     try {
       const storedValue = localStorage.getItem(key);
@@ -9,7 +9,13 @@ function useLocalStorage(key, initialValue) {
         return initialValue;
       }
 
-      return JSON.parse(storedValue);
+      const parsedValue = JSON.parse(storedValue);
+
+      if (!validate(parsedValue)) {
+        return initialValue;
+      }
+
+      return parsedValue;
     } catch (error) {
       console.error(`Failed to read ${key} from localStorage:`, error);
       return initialValue;

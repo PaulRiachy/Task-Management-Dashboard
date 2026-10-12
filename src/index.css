@@ -186,13 +186,15 @@ button {
   resize: vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus,
-.filter-panel input:focus,
-.filter-panel select:focus {
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible,
+.filter-panel input:focus-visible,
+.filter-panel select:focus-visible {
   border-color: #536dfe;
   background: white;
+  outline: 2px solid #536dfe;
+  outline-offset: 1px;
 }
 
 .error {
@@ -250,6 +252,11 @@ button {
   opacity: 0.9;
 }
 
+button:focus-visible {
+  outline: 2px solid #536dfe;
+  outline-offset: 2px;
+}
+
 .filter-panel {
   margin-bottom: 18px;
 }
@@ -263,6 +270,8 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 15px;
+  flex-wrap: nowrap; 
+  margin-top: 16px;
 }
 
 .filter-row select {
@@ -471,6 +480,25 @@ body.dark .empty-state h3 {
 
 body.dark .status-filters button {
   color: #cbd5e1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap; 
 }
 
 @media (max-width: 750px) {

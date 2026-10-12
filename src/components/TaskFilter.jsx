@@ -8,12 +8,19 @@ function TaskFilter({
 }) {
   return (
     <section className="filter-panel">
-      <input
-        type="text"
-        placeholder="Search tasks by title..."
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-      />
+      <div className="search-box">
+        <label htmlFor="task-search" className="sr-only">
+          Search tasks
+        </label>
+
+        <input
+          id="task-search"
+          type="text"
+          placeholder="Search tasks..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </div>
 
       <div className="filter-row">
         <div className="status-filters">
@@ -28,11 +35,19 @@ function TaskFilter({
           ))}
         </div>
 
-        <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-          <option value="priority">Priority</option>
-        </select>
+        <div className="sort-control">
+          <label htmlFor="task-sort">Sort by:</label>
+
+          <select
+            id="task-sort"
+            value={sortBy}
+            onChange={(event) => setSortBy(event.target.value)}
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="priority">Priority</option>
+          </select>
+        </div>
       </div>
     </section>
   );
